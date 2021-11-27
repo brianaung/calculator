@@ -1,0 +1,83 @@
+:root {
+  --calc-width: 20rem;
+  --calc-height: 30rem;
+  --screen-height: 6rem;
+  --grid-rows: 5;
+  --grid-cols: 4;
+
+  /* colors */
+  --red: #bf616a;
+  --yellow: #ebcb8b;
+  --orange: #d08770;
+  --light-blue: #81a1c1;
+  --light-green: #8fbcbb;
+  --light-white: #eceff4;
+  --white: #d8dee9;
+  --bg-color: #2e3440;
+}
+
+body { 
+  background-color: var(--bg-color); 
+  font-family: 'Comic Sans MS';
+}
+
+.calculator {
+  background-color: var(--white);
+  width: var(--calc-width);
+  height: var(--calc-height);
+  border: solid black .2rem;
+  border-radius: .6rem;
+  margin: auto; /* center align horizontally */
+  margin-top: 6rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.display {
+  background-color: var(--light-blue);
+  border: solid black .2rem;
+  border-radius: .6rem;
+  text-align: right;
+  height: var(--screen-height);
+  margin: .6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-end;
+}
+
+/* TODO: use different formatting to differentiate current and past entry. */
+.display-current,
+.display-history {
+  margin-right: .6rem;
+}
+
+.button-grids {
+  flex: 1 1 auto;
+  margin: .6rem;
+  display: grid;
+  grid-gap: .6rem;
+  grid-template-rows: repeat(var(--grid-rows), 1fr);
+  grid-template-columns: repeat(var(--grid-cols), 1fr);
+}
+
+/* darken background color on hover */
+button:hover { filter: brightness(.8) }
+
+.button-grids button {
+  font-family: inherit;
+  font-weight: bold;
+  border: solid black .2rem;
+  border-radius: .4rem;
+}
+
+/* delete buttons take up one row */
+.delete { grid-column: span 2; }
+
+/* grid button colors */
+.delete-all { background-color: var(--red); }
+.delete-one { background-color: var(--yellow); }
+.operator { background-color: var(--light-green); }
+.number { background-color: var(--light-white); }
+/**************************/
+
