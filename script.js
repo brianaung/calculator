@@ -1,3 +1,11 @@
+// TODO: 
+// add keyboard support
+// limit the number entry so display does not break
+// fix formatting of some decimal answers (do not round, format when answer too long)
+// add error messages for performing illegal operations such as dividing by zero
+// fix delete button behavior - not clearing history when performed right after operation
+// fix equal button behaviro - updating numbers when no entry
+
 let numArr = new Array(2).fill('0');
 let currIndex = 0; // store as first num
 let operator = '';
@@ -19,6 +27,7 @@ delBtn.addEventListener('click', deleteDisplay);
 eqBtn.addEventListener('click', showResult);
 
 
+let consecutiveOp = false;
 /* store and display the number that user is pressing. */
 function getNum(e) {
   if (numArr[currIndex] === '0') {
@@ -27,21 +36,27 @@ function getNum(e) {
     numArr[currIndex] += e.target.textContent;
   }
   displayCurrent(numArr[currIndex]);
+  consecutiveOp = false;
 }
 
 /* store the operator. new number entry after this should be stored as second number */
 function getOp(e) {
   operator = e.target.textContent;
 
-  /* already have 2 numbers, perform operation on them and update the num array */
-  if (currIndex === 1) {
-    numArr[0] = operate(operator, parseInt(numArr[0]), parseInt(numArr[1]));
-    numArr[currIndex] = '0';
-    currIndex = 0;
-  }
-  displayCurrent(numArr[currIndex]);
-  displayHistory(numArr[currIndex] + operator);
-  currIndex++;
+  if (!consecutiveOp) {
+    /* already have 2 numbers, perform operation on them and update the num array */
+    if (currIndex === 1) {
+      numArr[0] = operate(operator, parseInt(numArr[0]), parseInt(numArr[1]));
+      numArr[currIndex] = '0';
+      currIndex = 0;
+    }
+    displayCurrent(numArr[currIndex]);
+    currIndex++;
+  }   
+  /* when spamming another/same operator without entering new num,
+     only update operator not the num arr */
+  displayHistory(numArr[currIndex - 1] + operator);
+  consecutiveOp = true;
 }
 
 /* perform operation on the existing numbers using the operator,
