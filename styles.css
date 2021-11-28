@@ -2,6 +2,7 @@
   --calc-width: 20rem;
   --calc-height: 30rem;
   --screen-height: 6rem;
+  --screen-width: 17rem;
   --grid-rows: 5;
   --grid-cols: 4;
 
@@ -50,6 +51,8 @@ body {
 .display-current,
 .display-history {
   margin-right: .6rem;
+  max-width: var(--screen-width);
+  overflow-wrap: break-word;
 }
 
 .button-grids {
@@ -78,6 +81,7 @@ button:hover { filter: brightness(.8) }
 .delete-all { background-color: var(--red); }
 .delete-one { background-color: var(--yellow); }
 .operator { background-color: var(--light-green); }
+.equals { background-color: var(--light-green); }
 .number { background-color: var(--light-white); }
 /**************************/
 
